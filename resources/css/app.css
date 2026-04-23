@@ -63,8 +63,13 @@
 
     /* My created all theme variables  */
 
+    --color-headbg: #1b263b;
     --color-navbg: #1b263b;
     --color-loginbg: #ffde59;
+    --color-headofftxt: #bfbfbf;
+    --color-text40: #404040;
+    --color-text50: #505050;
+    --color-text26: #262626;
 }
 
 :root {
@@ -148,9 +153,42 @@
     }
 }
 
+@layer utilities {
+    .poppins {
+        font-family: 'Poppins', sans-serif;
+    }
+}
+
+@layer base {
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #fff;
+    }
+    button,
+    a {
+        @apply cursor-pointer;
+    }
+}
+
 @layer components {
-    navbtn {
+    .navbtn {
         @apply text-lg font-normal;
+        font-family: 'Poppins', sans-serif;
+    }
+    .footnavbtn {
+        @apply text-[16px] font-normal;
+        font-family: 'Poppins', sans-serif;
+    }
+    .foottitlebtn {
+        @apply text-xl font-normal;
+        font-family: 'Poppins', sans-serif;
+    }
+    .headtitle {
+        @apply text-6xl font-bold;
+        font-family: 'Poppins', sans-serif;
+    }
+    .hometitle {
+        @apply text-[56px] font-bold;
         font-family: 'Poppins', sans-serif;
     }
 }

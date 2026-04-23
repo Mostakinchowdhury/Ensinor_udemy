@@ -19,25 +19,39 @@ export default function Nav() {
                 {/* Nav Links - flex ব্যবহার করতে হবে যাতে পাশাপাশি থাকে */}
                 <ul className="flex items-center gap-6 text-white">
                     <li>
-                        <Link href="/">Home</Link>
+                        <Link href="/" className="navbtn">
+                            Home
+                        </Link>
                     </li>
                     <li>
-                        <Link href="/courses">Courses</Link>
+                        <Link href="/courses" className="navbtn">
+                            Courses
+                        </Link>
                     </li>
                     <li>
-                        <Link href="/instructors">Instructors</Link>
+                        <Link href="/instructors" className="navbtn">
+                            Instructors
+                        </Link>
                     </li>
                     <li>
-                        <Link href="/business">Business</Link>
+                        <Link href="/business" className="navbtn">
+                            Business
+                        </Link>
                     </li>
                     <li>
-                        <Link href="/pages">Pages</Link>
+                        <Link href="/pages" className="navbtn">
+                            Pages
+                        </Link>
                     </li>
                     <li>
-                        <Link href="/events">Events</Link>
+                        <Link href="/events" className="navbtn">
+                            Events
+                        </Link>
                     </li>
                     <li>
-                        <Link href="/shop">Shop</Link>
+                        <Link href="/shop" className="navbtn">
+                            Shop
+                        </Link>
                     </li>
                     <li>
                         <Link href="/cart">
