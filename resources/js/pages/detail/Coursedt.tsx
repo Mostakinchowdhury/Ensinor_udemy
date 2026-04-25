@@ -10,18 +10,13 @@ import {
     Timer,
 } from 'lucide-react';
 import React from 'react';
+import Addreviewpop from '@/components/Coursedetail/Addreviewpop';
+import Onereviewindetail from '@/components/Coursedetail/Onereviewindetail';
 import Singlecritem from '@/components/Coursedetail/Singlecritem';
+import Tags from '@/components/Coursedetail/Tags';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import Detaillayout from '@/layouts/Detaillayout';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import Tags from '@/components/Coursedetail/Tags';
-import Onereviewindetail from '@/components/Coursedetail/Onereviewindetail';
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from '@/components/ui/popover';
-import Addreviewpop from '@/components/Coursedetail/Addreviewpop';
 
 export default function Coursedt({ id }: { id: string }) {
     const tags = [
