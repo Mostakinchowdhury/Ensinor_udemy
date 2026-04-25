@@ -7,3 +7,14 @@ Route::inertia('/', 'Welcome');
 Route::get('/about', function () {
     return Inertia::render('About');
 })->name('about');
+
+Route::get("/courses", function () {
+    return Inertia::render("Courses");
+})->name("courses");
+
+
+// single course
+
+Route::get("/courses/{id}",function($id){
+    return Inertia::render("detail/Coursedt",["id"=>$id]);
+});

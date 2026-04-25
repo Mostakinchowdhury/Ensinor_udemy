@@ -7,8 +7,8 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
-    layout: () => {
-        return null;
+    layout: (t) => {
+        return t;
     },
     strictMode: true,
     withApp(app) {
