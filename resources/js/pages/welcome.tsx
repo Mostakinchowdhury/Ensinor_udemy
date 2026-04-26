@@ -1,10 +1,9 @@
 import SubscriptionContainer from '@/components/pricing/SubscriptionContainer'
-import React from 'react'
 
 const welcome = () => {
   return (
     <div>
-        <SubscriptionContainer />
+        <h1>Home page</h1>
     </div>
   )
 }
