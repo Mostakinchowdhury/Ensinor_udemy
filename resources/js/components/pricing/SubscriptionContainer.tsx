@@ -1,3 +1,5 @@
+import Footer from '../global/Footer';
+import Nav from '../global/nav';
 import SubscriptionCard from './SubscriptionCard';
 
 const plans = [
@@ -40,8 +42,9 @@ const plans = [
 ];
 
 const SubscriptionContainer = () => {
-    return (
-        <div className="w-full bg-white px-4 py-12 text-black">
+    return (<>
+    <Nav />
+    <div className="w-full bg-white px-4 py-12 text-black">
             <h1 className="text-center text-3xl font-semibold md:text-4xl">
                 Instructor Subscription
             </h1>
@@ -62,6 +65,9 @@ const SubscriptionContainer = () => {
                 ))}
             </div>
         </div>
+        <Footer />
+    </>
+        
     );
 };
 

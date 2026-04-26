@@ -34,5 +34,3 @@ export default function Welcome() {
         </div>
     );
 }
-
-export default Welcome
