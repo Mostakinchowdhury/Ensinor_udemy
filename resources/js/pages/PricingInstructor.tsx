@@ -1,7 +1,6 @@
 import SubscriptionContainer from '@/components/pricing/SubscriptionContainer'
-import React from 'react'
 
-const welcome = () => {
+const PricingInstructor = () => {
   return (
     <div>
         <SubscriptionContainer />
@@ -9,4 +8,4 @@ const welcome = () => {
   )
 }
 
-export default welcome
+export default PricingInstructor
