@@ -1,10 +1,22 @@
 import React from 'react'
 import FilterInstructor from './FilterInstructor'
+import InstructorCard from './InstructorCard'
 
 const EveryInstructorDataContainer = () => {
   return (
-    <div className='min-w-6xl mx-auto border'>
+    <div className='max-w-6xl mx-auto'>
         <FilterInstructor />
+        <div className='grid grid-cols-3 gap-4'>
+          <InstructorCard />
+          <InstructorCard />
+          <InstructorCard />
+          <InstructorCard />
+          <InstructorCard />
+          <InstructorCard />
+          <InstructorCard />
+          <InstructorCard />
+          <InstructorCard />
+        </div>
     </div>
   )
 }
