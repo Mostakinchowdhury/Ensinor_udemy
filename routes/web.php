@@ -12,6 +12,10 @@ Route::get('/pricing', function () {
     return Inertia::render('Pricing');
 });
 
+Route::get('/instructor', function () {
+    return Inertia::render('Instructor');
+});
+
 Route::get("/courses", function () {
     return Inertia::render("Courses");
 })->name("courses");
