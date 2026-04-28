@@ -6,7 +6,7 @@ import React from 'react'
 
 const InstructorDetail = () => {
   return (
-    <div>
+    <div className='text-black'>
         <Nav/>
         <Comhead/>
         <DetailsContainer/>
