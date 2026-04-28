@@ -15,6 +15,9 @@ Route::get('/pricing', function () {
 Route::get('/instructor', function () {
     return Inertia::render('Instructor');
 });
+Route::get('/instructor/{id}', function ($id) {
+    return Inertia::render('InstructorDetail', ["id" => $id]);
+});
 
 Route::get("/courses", function () {
     return Inertia::render("Courses");
