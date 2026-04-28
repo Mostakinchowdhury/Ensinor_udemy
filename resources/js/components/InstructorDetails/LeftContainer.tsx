@@ -1,8 +1,15 @@
 import React from 'react'
+import EducationCard from './EducationCard'
+import ProfileCard from './ProfileCard'
+import SkillCard from './SkillCard'
 
 const LeftContainer = () => {
   return (
-    <div>LeftContainer</div>
+    <div>
+        <ProfileCard />
+        <EducationCard />
+        <SkillCard />
+    </div>
   )
 }
 
