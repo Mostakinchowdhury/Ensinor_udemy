@@ -1,6 +1,7 @@
 import React from 'react'
 import AchievementContainer from './AchievementContainer'
 import Contacts from './Contacts'
+import CourseListContainer from './CourseListContainer'
 import PersonalData from './PersonalData'
 
 const RightContainer = () => {
@@ -9,6 +10,7 @@ const RightContainer = () => {
       <PersonalData/>
       <Contacts/>
       <AchievementContainer/>
+      <CourseListContainer/>
     </div>
   )
 }
