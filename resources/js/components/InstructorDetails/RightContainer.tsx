@@ -1,8 +1,15 @@
 import React from 'react'
+import AchievementContainer from './AchievementContainer'
+import Contacts from './Contacts'
+import PersonalData from './PersonalData'
 
 const RightContainer = () => {
   return (
-    <div>RightContainer</div>
+    <div>
+      <PersonalData/>
+      <Contacts/>
+      <AchievementContainer/>
+    </div>
   )
 }
 
