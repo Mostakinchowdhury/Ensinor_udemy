@@ -42,8 +42,8 @@ const FilterInstructor = () => {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setSearch(e.target.value)
               }
-              className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-xl 
-              focus:outline-none focus:ring-2 focus:ring-loginbg focus:border-loginbg
+              className="w-full pl-10 pr-4 py-3 border border-text50 bg-[#F3F6F7] rounded-xl 
+              focus:outline-none 
               transition"
             />
           </div>
@@ -54,8 +54,8 @@ const FilterInstructor = () => {
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
               setCategory(e.target.value)
             }
-            className="w-full md:flex-1 px-4 py-3 border border-slate-300 rounded-xl 
-            focus:outline-none focus:ring-2 focus:ring-loginbg focus:border-loginbg
+            className="w-full md:flex-1 px-4 py-3 border  rounded-xl 
+            focus:outline-none border-text50 bg-[#F3F6F7]
             transition"
           >
             <option value="">Category</option>
@@ -71,8 +71,8 @@ const FilterInstructor = () => {
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
               setSort(e.target.value)
             }
-            className="w-full md:flex-1 px-4 py-3 border border-slate-300 rounded-xl 
-            focus:outline-none focus:ring-2 focus:ring-loginbg focus:border-loginbg
+            className="w-full md:flex-1 px-4 py-3 border  rounded-xl 
+            focus:outline-none border-text50 bg-[#F3F6F7]
             transition"
           >
             <option value="">Sort by</option>
@@ -84,7 +84,7 @@ const FilterInstructor = () => {
           {/* Button */}
           <button
             type="submit"
-            className="w-full md:w-auto px-6 py-3 font-semibold bg-loginbg text-black rounded-xl hover:bg-loginbg/80 transition"
+            className="w-full md:w-auto px-6 py-3 font-medium bg-loginbg text-text26 rounded-xl hover:bg-loginbg/80 transition"
           >
             Filter results
           </button>
