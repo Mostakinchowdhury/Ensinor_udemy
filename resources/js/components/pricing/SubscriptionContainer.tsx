@@ -45,11 +45,11 @@ const SubscriptionContainer = () => {
     return (<>
     <Nav />
     <div className="w-full bg-white px-4 py-12 text-black">
-            <h1 className="text-center text-3xl font-semibold md:text-4xl">
+            <h1 className="text-center text-lg text-[#404040] font-semibold md:text-[48px]">
                 Instructor Subscription
             </h1>
 
-            <p className="mx-auto mt-2 max-w-xl text-center text-gray-500">
+            <p className="mx-auto mt-2 max-w-xl text-[18px] text-center text-[#505050]">
                 Choose the perfect plan for your organization's size and needs
             </p>
 
