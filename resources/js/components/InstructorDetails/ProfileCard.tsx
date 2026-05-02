@@ -3,10 +3,10 @@ import React from 'react';
 
 const ProfileCard = () => {
     return (
-        <div className='bg-[#f3f6f7] w-78 h-103 p-4 rounded-2xl shadow-md hover:shadow-xl transition duration-300 flex flex-col items-center justify-between'>
+        <div className='bg-[#f3f6f7] w-83 h-103 p-4 rounded-2xl shadow-md hover:shadow-xl transition duration-300 flex flex-col items-center justify-between'>
             
             {/* Image */}
-<div className="w-[280px] h-[302px] rounded-xl overflow-hidden shadow">
+<div className="w-77.5 h-75.5 rounded-xl overflow-hidden shadow">
     <img 
         src="./contributer.png" 
         alt="profile" 

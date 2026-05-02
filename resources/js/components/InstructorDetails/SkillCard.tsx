@@ -14,7 +14,7 @@ const skills = [
 
 const SkillCard = () => {
   return (
-    <div className='bg-[#f3f6f9] w-78 h-60 p-4 rounded-2xl shadow-md hover:shadow-xl transition duration-300 flex flex-col'>
+    <div className='bg-[#f3f6f9] w-[332px] min-h-60 p-4 rounded-2xl shadow-md hover:shadow-xl transition duration-300 flex flex-col'>
         
         {/* Title */}
         <h1 className='text-lg font-semibold text-gray-700 mb-3'>Skills</h1>
@@ -24,7 +24,7 @@ const SkillCard = () => {
             {skills.map((skill, index) => (
                 <p
                     key={index}
-                    className="text-xs text-center bg-white px-2 py-2 rounded-lg shadow-sm hover:shadow-md hover:bg-loginbg hover:text-black hover:font-black transition cursor-pointer"
+                    className="text-[12px] text-center bg-white px-2 py-2 rounded-lg shadow-sm"
                 >
                     {skill}
                 </p>

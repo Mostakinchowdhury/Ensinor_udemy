@@ -3,19 +3,19 @@ import React from 'react'
 
 const EducationInstituteCard = () => {
   return (
-    <div className='flex items-center gap-3 p-2 bg-white rounded-xl shadow-sm hover:shadow-md transition cursor-pointer'>
+    <div className='flex items-center gap-3 p-2 cursor-pointer'>
         
         {/* Icon */}
-        <div className='p-2 bg-blue-100 text-blue-600 rounded-full'>
-            <GraduationCap size={18} />
+        <div className='p-2 bg-[#FFFFFF] text-black rounded'>
+            <GraduationCap size={24} />
         </div>
 
         {/* Info */}
         <div className='flex flex-col'>
-            <p className='text-sm font-semibold text-gray-800'>
+            <p className='text-[16px] font-semibold text-[#606060]'>
                 University of Dhaka
             </p>
-            <p className='text-xs text-gray-500'>
+            <p className='text-[12px] text-[#606060]'>
                 UI & UX Designer
             </p>
         </div>
