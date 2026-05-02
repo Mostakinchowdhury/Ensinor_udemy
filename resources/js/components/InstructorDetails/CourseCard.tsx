@@ -3,7 +3,7 @@ import React from "react";
 
 const CourseCard = () => {
   return (
-    <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition overflow-hidden flex flex-col">
+    <div className="bg-[#F3F6F7] rounded-2xl w-full shadow-sm hover:shadow-md transition overflow-hidden flex flex-col">
       
       {/* Image */}
       <div className="w-full h-40 overflow-hidden">
@@ -28,17 +28,17 @@ const CourseCard = () => {
         </div>
 
         {/* Title */}
-        <h1 className="text-lg font-semibold leading-snug">
+        <h1 className="text-lg font-semibold text-[#404040] leading-snug">
           Professional Graphics Design
         </h1>
 
         {/* Description */}
-        <p className="text-sm text-slate-600 line-clamp-2">
+        <p className="text-sm text-text50 line-clamp-2">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, cum.
         </p>
 
         {/* Rating + Students */}
-        <div className="flex justify-between text-sm">
+        <div className="flex justify-between text-text50 text-sm">
           <p className="flex items-center gap-1 font-medium">
             ⭐ <span>4.7 (7k)</span>
           </p>

@@ -11,7 +11,7 @@ const PageChange = () => {
       </button>
 
       {/* Pages */}
-      <button className="w-9 h-9 rounded-lg bg-loginbg text-black font-medium">
+      <button className="w-9 h-9 rounded-lg bg-[#FFDE59] text-black font-medium">
         1
       </button>
       <button className="w-9 h-9 rounded-lg border border-slate-300 hover:bg-slate-100 transition">
