@@ -1,3 +1,4 @@
+import { usePage } from '@inertiajs/react';
 import {
     ArrowDown,
     Book,
@@ -9,7 +10,7 @@ import {
     StarIcon,
     Timer,
 } from 'lucide-react';
-import React from 'react';
+import React, { useState } from 'react';
 import Addreviewpop from '@/components/Coursedetail/Addreviewpop';
 import Onereviewindetail from '@/components/Coursedetail/Onereviewindetail';
 import Singlecritem from '@/components/Coursedetail/Singlecritem';
@@ -17,17 +18,83 @@ import Tags from '@/components/Coursedetail/Tags';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import Detaillayout from '@/layouts/Detaillayout';
+import type { Course } from '@/types/course';
 
-export default function Coursedt({ id }: { id: string }) {
-    const tags = [
-        'blog',
-        'business',
-        'theme',
-        'data science',
-        'web development',
-        'tips',
-        'machinelearning',
-    ];
+export type Lesson = {
+    id: number;
+    course_id: number;
+    lesson: string;
+    created_at: string;
+    updated_at: string;
+};
+export type User = {
+    id: number;
+    name: string;
+    email: string;
+    role: 'User' | string; // চাইলে আরও strict করা যাবে
+    email_verified_at: string | null;
+    two_factor_confirmed_at: string | null;
+    created_at: string;
+    updated_at: string;
+};
+export type ReplayOfReview = {
+    id: number;
+    review_id: number;
+    user_id: number;
+    replay_msg: string;
+    user: User;
+    created_at: string;
+    updated_at: string;
+};
+export type curriculam = {
+    id: number;
+    course_id: number;
+    title: string;
+    duration: string;
+    ispremium: 0 | 1;
+    url: string;
+    created_at: string;
+    updated_at: string;
+};
+
+export type Review = {
+    id: number;
+    course_id: number;
+    user_id: number;
+    rating: number;
+    review_msg: string;
+    created_at: string;
+    updated_at: string;
+    user: User;
+    replay_of_reviews: ReplayOfReview[];
+};
+export default function Coursedt({
+    course,
+}: {
+    course: Course & {
+        lessons: Lesson[];
+        curriculums: curriculam[];
+        reviews: Review[];
+        tags: any;
+    };
+}) {
+    const pag = usePage();
+
+    const [count, setcount] = useState<number>(5);
+
+    const [c, setc] = useState<curriculam>(
+        course.curriculums.filter((i) => !i.ispremium)[0],
+    );
+
+    const handleseemore = () => {
+        if (count >= course.curriculums.length) {
+            return;
+        } else {
+            setcount(count + 5);
+        }
+    };
+
+    console.log('page info', pag);
 
     return (
         <Detaillayout>
@@ -36,19 +103,20 @@ export default function Coursedt({ id }: { id: string }) {
 
                 <div className="space-y-6 lg:col-span-2">
                     <h2 className="text-5xl font-semibold text-text40">
-                        The Complete UX/UI Design Course id {id}
+                        {course?.title || 'The Complete UX/UI Design Course id'}
                     </h2>
                     <p className="text-lg text-text50">
-                        This course helps you learn everything from basic to
+                        {course?.summary ??
+                            ` This course helps you learn everything from basic to
                         advanced topics in UX and UI design. It provides
                         complete knowledge about User Experience (UX) and User
-                        Interface (UI) design.
+                        Interface (UI) design.`}
                     </p>
                     <iframe
                         className="w-full"
                         height="500"
-                        src="https://www.youtube.com/embed/HjH2Thk4ZVo?si=U07DbB2VuUwOivB2"
-                        title="YouTube video player"
+                        src={c.url as string}
+                        title={c.title as string}
                         frameborder={'0' as string}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         referrerpolicy="strict-origin-when-cross-origin"
@@ -60,7 +128,8 @@ export default function Coursedt({ id }: { id: string }) {
                             Course description
                         </h3>
                         <p className="text-lg text-text50">
-                            This course provides an in-depth journey through the
+                            {course?.description ??
+                                `This course provides an in-depth journey through the
                             principles and practices of UX (User Experience) and
                             UI (User Interface) design. Whether you're a
                             complete beginner or a creative professional looking
@@ -71,89 +140,33 @@ export default function Coursedt({ id }: { id: string }) {
                             learners will be able to conceptualize, design, and
                             prototype digital products that are not only
                             visually appealing but also intuitive and
-                            user-centered.
+                            user-centered.`}
                         </p>
                         <h3 className="text-2xl font-semibold text-text40">
                             What You'll Learn
                         </h3>
                         <ul className="space-y-2.5">
-                            <li className="flex items-center gap-1.5 text-lg font-medium text-[#404040]">
-                                {' '}
-                                <span className="inline-block rounded-full border-2 border-green-700 p-0.5">
-                                    <Check color="green" size={16} />
-                                </span>{' '}
-                                <p>
-                                    Principles of User Experience (UX) and User
-                                    Interface (UI) Design
-                                </p>
-                            </li>
-                            <li className="flex items-center gap-1.5 text-lg font-medium text-[#404040]">
-                                {' '}
-                                <span className="inline-block rounded-full border-2 border-green-700 p-0.5">
-                                    <Check color="green" size={16} />
-                                </span>{' '}
-                                <p>
-                                    Conducting user research and building user
-                                    personas
-                                </p>
-                            </li>
-                            <li className="flex items-center gap-1.5 text-lg font-medium text-[#404040]">
-                                {' '}
-                                <span className="inline-block rounded-full border-2 border-green-700 p-0.5">
-                                    <Check color="green" size={16} />
-                                </span>{' '}
-                                <p>
-                                    Creating user journeys, wireframes, and
-                                    sitemaps
-                                </p>
-                            </li>
-                            <li className="flex items-center gap-1.5 text-lg font-medium text-[#404040]">
-                                {' '}
-                                <span className="inline-block rounded-full border-2 border-green-700 p-0.5">
-                                    <Check color="green" size={16} />
-                                </span>{' '}
-                                <p>
-                                    Designing high-fidelity interfaces with
-                                    Figma or Adobe XD
-                                </p>
-                            </li>
-                            <li className="flex items-center gap-1.5 text-lg font-medium text-[#404040]">
-                                {' '}
-                                <span className="inline-block rounded-full border-2 border-green-700 p-0.5">
-                                    <Check color="green" size={16} />
-                                </span>{' '}
-                                <p>
-                                    Prototyping and testing designs with real
-                                    users
-                                </p>
-                            </li>
-                            <li className="flex items-center gap-1.5 text-lg font-medium text-[#404040]">
-                                {' '}
-                                <span className="inline-block rounded-full border-2 border-green-700 p-0.5">
-                                    <Check color="green" size={16} />
-                                </span>{' '}
-                                <p>
-                                    Responsive and accessible design principles
-                                </p>
-                            </li>
-                            <li className="flex items-center gap-1.5 text-lg font-medium text-[#404040]">
-                                {' '}
-                                <span className="inline-block rounded-full border-2 border-green-700 p-0.5">
-                                    <Check color="green" size={16} />
-                                </span>{' '}
-                                <p>
-                                    Handoff to developers and working in design
-                                    teams
-                                </p>
-                            </li>
+                            {course.lessons.map((i) => (
+                                <li
+                                    className="flex items-center gap-1.5 text-lg font-medium text-[#404040]"
+                                    key={i.id}
+                                >
+                                    {' '}
+                                    <span className="inline-block rounded-full border-2 border-green-700 p-0.5">
+                                        <Check color="green" size={16} />
+                                    </span>{' '}
+                                    <p>{i.lesson}</p>
+                                </li>
+                            ))}
                         </ul>
                         {/* end of description */}
                         <p className="text-lg text-text50">
-                            From understanding user behavior and creating user
+                            {course?.conclusion ??
+                                `From understanding user behavior and creating user
                             flows to designing high-fidelity interfaces and
                             interactive prototypes, this course covers the
                             entire UX/UI process using industry-standard tools
-                            like Figma and Adobe XD.
+                            like Figma and Adobe XD.`}
                         </p>
                     </div>
                     {/* Courses curriculum */}
@@ -163,16 +176,21 @@ export default function Coursedt({ id }: { id: string }) {
                         </h3>
                         {/* list of curriculum */}
                         <ul className="space-y-5">
-                            <Singlecritem ispremium={false} />
-                            <Singlecritem ispremium={false} />
-                            <Singlecritem ispremium={true} />
-                            <Singlecritem ispremium={false} />
-                            <Singlecritem ispremium={true} />
-                            <Singlecritem ispremium={true} />
+                            {course.curriculums
+                                .slice(
+                                    0,
+                                    count > course.curriculums.length
+                                        ? course.curriculums.length
+                                        : count,
+                                )
+                                .map((i) => (
+                                    <Singlecritem data={i} fn={setc} />
+                                ))}
                         </ul>
                         <Button
                             className="mx-auto! block text-lg! text-[#1B263B]"
                             variant={'ghost'}
+                            onClick={handleseemore}
                         >
                             See more video{' '}
                             <ArrowDown className="ml-1.5 inline-block" />
@@ -221,7 +239,9 @@ export default function Coursedt({ id }: { id: string }) {
                                     />
                                     Lectures
                                 </p>
-                                <p className="text-lg text-text40">48</p>
+                                <p className="text-lg text-text40">
+                                    {course?.lectures ?? '48'}
+                                </p>
                             </li>
                             <li className="flex w-full items-center justify-between gap-4">
                                 <p className="text-lg text-text40">
@@ -232,7 +252,18 @@ export default function Coursedt({ id }: { id: string }) {
                                     />
                                     Duration
                                 </p>
-                                <p className="text-lg text-text40">35h 07m</p>
+                                <p className="text-lg text-text40">
+                                    {course
+                                        ? `${Math.floor(
+                                              Number(course.duration) / 60,
+                                          )
+                                              .toString()
+                                              .padStart(
+                                                  2,
+                                                  '0',
+                                              )}h ${String(Number(course.duration) % 60).padStart(2, '0')}m`
+                                        : '35h 07m'}
+                                </p>
                             </li>
                             <li className="flex w-full items-center justify-between gap-4">
                                 <p className="text-lg text-text40">
@@ -243,7 +274,9 @@ export default function Coursedt({ id }: { id: string }) {
                                     />
                                     Beginner
                                 </p>
-                                <p className="text-lg text-text40">Beginner</p>
+                                <p className="text-lg text-text40">
+                                    {course?.course_type ?? 'Beginner'}
+                                </p>
                             </li>
                             <li className="flex w-full items-center justify-between gap-4">
                                 <p className="text-lg text-text40">
@@ -254,7 +287,9 @@ export default function Coursedt({ id }: { id: string }) {
                                     />
                                     Language
                                 </p>
-                                <p className="text-lg text-text40">English</p>
+                                <p className="text-lg text-text40">
+                                    {course?.language ?? 'English'}
+                                </p>
                             </li>
                             <li className="flex w-full items-center justify-between gap-4">
                                 <p className="text-lg text-text40">
@@ -266,7 +301,13 @@ export default function Coursedt({ id }: { id: string }) {
                                     Deadline
                                 </p>
                                 <p className="text-lg text-text40">
-                                    25 Sep 2025
+                                    {new Date(
+                                        course?.deadline as string,
+                                    ).toLocaleString('usa', {
+                                        day: '2-digit',
+                                        month: 'short',
+                                        year: 'numeric',
+                                    }) ?? '25 Sep 2025'}
                                 </p>
                             </li>
                             <li className="flex w-full items-center justify-between gap-4">
@@ -278,7 +319,9 @@ export default function Coursedt({ id }: { id: string }) {
                                     />
                                     Certificate
                                 </p>
-                                <p className="text-lg text-text40">Yes</p>
+                                <p className="text-lg text-text40">
+                                    {course?.certificate ? 'Yes' : 'No'}
+                                </p>
                             </li>
                         </ul>
                         {/* price */}
@@ -288,7 +331,9 @@ export default function Coursedt({ id }: { id: string }) {
                                 Price
                             </p>
                             <p className="text-2xl font-semibold text-text40">
-                                $120
+                                {course?.price
+                                    ? '$'.concat(course.price.toString())
+                                    : '$120'}
                             </p>
                         </div>
                         <div className="flex w-full items-center gap-3">
@@ -308,7 +353,7 @@ export default function Coursedt({ id }: { id: string }) {
                             </Button>
                         </div>
                     </div>
-                    <Tags alltags={tags} />
+                    <Tags alltags={course.tags} />
                 </div>
             </section>
             {/* review section */}
@@ -316,7 +361,13 @@ export default function Coursedt({ id }: { id: string }) {
                 <div className="mb-10 flex items-start justify-between gap-5">
                     <div className="space-y-2">
                         <h3 className="text-3xl font-semibold text-text40">
-                            Reviews (1.5k)
+                            Reviews (
+                            {course.reviews.length > 1000
+                                ? (course.reviews.length / 1000)
+                                      .toFixed(2)
+                                      .concat('K')
+                                : course.reviews.length}
+                            )
                         </h3>
                         <p className="text-lg text-text50">
                             Get specific details about this Course from student
@@ -325,11 +376,9 @@ export default function Coursedt({ id }: { id: string }) {
                     </div>
                     <Addreviewpop />
                 </div>
-                <Onereviewindetail />
-                <Onereviewindetail />
-                <Onereviewindetail />
-                <Onereviewindetail />
-                <Onereviewindetail />
+                {course.reviews.map((i) => (
+                    <Onereviewindetail key={i.id} data={i} />
+                ))}
             </div>
         </Detaillayout>
     );

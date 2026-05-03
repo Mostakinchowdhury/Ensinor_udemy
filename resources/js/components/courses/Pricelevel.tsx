@@ -1,10 +1,14 @@
 import React from 'react';
 
-export default function Pricelevel({ pricelevels }: { pricelevels: string[] }) {
-    const [selectedType, setSelectedType] = React.useState<string>(
-        pricelevels[0],
-    );
-
+export default function Pricelevel({
+    pricelevels,
+    value,
+    fn,
+}: {
+    pricelevels: string[];
+    value: string;
+    fn: (name: string, value: string) => void;
+}) {
     return (
         <div className="space-y-4 rounded-lg bg-[#F3F6F7] p-3.5">
             <h3 className="my-3 border-b-2 border-text50 pb-4 text-2xl font-medium text-text26">
@@ -14,8 +18,8 @@ export default function Pricelevel({ pricelevels }: { pricelevels: string[] }) {
                 {pricelevels.map((pricelevel) => (
                     <div
                         key={pricelevel}
-                        className={`cursor-pointer rounded-sm px-6 py-2.5 text-lg ${selectedType == pricelevel ? 'bg-loginbg text-text26' : 'bg-white text-text26'}`}
-                        onClick={() => setSelectedType(pricelevel)}
+                        className={`cursor-pointer rounded-sm px-6 py-2.5 text-lg ${value == pricelevel ? 'bg-loginbg text-text26' : 'bg-white text-text26'}`}
+                        onClick={() => fn('price_level', pricelevel)}
                     >
                         {pricelevel}
                     </div>

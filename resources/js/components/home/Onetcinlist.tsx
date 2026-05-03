@@ -1,8 +1,9 @@
 import { BookOpen, BookPlus, Clock, Heart, Star } from 'lucide-react';
 import React from 'react';
+import type { Course } from '@/types/course';
 import { Badge } from '../ui/badge';
 
-export default function Onetcinlist({ level }: { level?: string }) {
+export default function Onetcinlist({ data }: { data: Course }) {
     const [isfavorited, setisfavorited] = React.useState(false);
     function handlefavo() {
         setisfavorited(!isfavorited);
@@ -18,9 +19,9 @@ export default function Onetcinlist({ level }: { level?: string }) {
             </div>
             <div className="flex items-center justify-between">
                 <Badge
-                    className={`${level == 'All level' ? 'bg-green-200 text-green-700' : level == 'Beginner' ? 'bg-amber-200 text-amber-700' : 'bg-blue-200 text-blue-700'}`}
+                    className={`${data.course_type == 'All level' ? 'bg-green-200 text-green-700' : data.course_type == 'Beginner' ? 'bg-amber-200 text-amber-700' : 'bg-blue-200 text-blue-700'}`}
                 >
-                    {level || 'All level'}
+                    {data.course_type || 'All level'}
                 </Badge>
                 <Badge className={'bg-green-200 text-green-700'}>
                     Development
@@ -33,33 +34,50 @@ export default function Onetcinlist({ level }: { level?: string }) {
                 />
             </div>
             <h3 className="text-[20px] font-medium text-text40">
-                Professional Graphic Design
+                {data.title ?? 'Professional Graphic Design'}
             </h3>
 
             <div className="flex items-center justify-between text-lg text-text50">
                 <div>
-                    <Star className="mx-1.5 inline-block" color="yellow" /> 4.7
-                    (7k)
+                    <Star className="mx-1.5 inline-block" color="yellow" />{' '}
+                    {data.average_rating.toFixed(1)} (
+                    {data.total_rating > 1000
+                        ? (data.total_rating / 1000).toFixed(2)
+                        : data.total_rating}
+                    )
                 </div>
                 <div>
-                    <Star className="mx-1.5 inline-block" color="yellow" /> 13k
+                    <Star className="mx-1.5 inline-block" color="yellow" />{' '}
+                    {data.total_student > 1000
+                        ? (data.total_student / 1000).toFixed(2)
+                        : data.total_student}{' '}
                     Students
                 </div>
             </div>
             <div className="mb-6 flex items-center justify-between border-b-2 border-black pb-6 text-lg text-text50">
                 <p>
-                    <Clock className="mx-1.5 inline-block" /> 35h 07m
+                    <Clock className="mx-1.5 inline-block" />{' '}
+                    {data
+                        ? `${Math.floor(Number(data.duration) / 60)
+                              .toString()
+                              .padStart(
+                                  2,
+                                  '0',
+                              )}h ${String(Number(data.duration) % 60).padStart(2, '0')}m`
+                        : '35h 07m'}
                 </p>
                 <p>
                     <BookPlus className="mx-1.5 inline-block" />
-                    48 lectures
+                    {data.lectures} lectures
                 </p>
             </div>
             <div className="flex items-center justify-between">
                 <p className="text-lg text-text50">
                     <BookOpen className="mx-1.5 inline-block" /> Polash
                 </p>
-                <p className="text-xl font-semibold text-text40">$520</p>
+                <p className="text-xl font-semibold text-text40">
+                    {data.price == 0 ? 'Free' : `$${data.price}`}
+                </p>
             </div>
         </div>
     );

@@ -1,5 +1,6 @@
+import { useForm, usePage } from '@inertiajs/react';
 import { LucideArrowLeft, LucideArrowRight } from 'lucide-react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import Listlayout from '@/layouts/Listlayout';
@@ -17,35 +18,92 @@ import {
     PaginationEllipsis,
     PaginationItem,
     PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
 } from '@/components/ui/pagination';
 import Subscribe from '@/components/home/Subscribe';
+import { Course } from '@/types/course';
 
-export default function Courses() {
+export interface PaginatedResponse<T> {
+    current_page: number;
+    data: T[];
+    first_page_url: string;
+    from: number;
+    last_page: number;
+    last_page_url: string;
+    links: PaginationLink[];
+    next_page_url: string | null;
+    path: string;
+    per_page: number;
+    prev_page_url: string | null;
+    to: number;
+    total: number;
+}
+
+export interface PaginationLink {
+    url: string | null;
+    label: string;
+    page: number | null;
+    active: boolean;
+}
+
+export default function Courses({
+    courses,
+    languages,
+    categories,
+    cl,
+}: {
+    courses: PaginatedResponse<Course>;
+    languages: string[];
+    categories: { name: string; total_courses: number }[];
+    cl: number;
+}) {
     // radio items
+    const { url } = usePage();
+    const params = new URLSearchParams(url.split('?')[1]);
+    const { data, setData, get } = useForm({
+        category: params.get('category') ?? 'allcourses',
+        bundle_type: params.get('bundle_type') ?? 'Single',
+        price_level: params.get('price_level') ?? 'Paid',
+        language: params.get('language') ?? 'English',
+        search: params.get('search') ?? '',
+        sorting: params.get('sorting') ?? 'Latest',
+        skilllevel: params.get('skilllevel') ?? 'All levels',
+    });
 
-    const radioItems: { value: string; label: string; amount: number }[] = [
-        { value: 'allcourses', label: 'All Courses', amount: 2520 },
-        { value: 'development', label: 'Development', amount: 379 },
-        { value: 'design', label: 'Design', amount: 720 },
-        { value: 'marketing', label: 'Marketing', amount: 455 },
-        { value: 'finance', label: 'Finance', amount: 379 },
-        { value: 'illustrations', label: 'Illustrations', amount: 657 },
-        { value: 'writing', label: 'Writing', amount: 850 },
-    ];
+    const [radioitems, setradioitems] = useState<
+        { name: string; total_courses: number }[]
+    >([{ name: 'allcourses', total_courses: cl }]);
     const coursestypes = ['Single', 'Bundle'];
     const pricelevels = ['All', 'Free', 'Paid'];
     const skilllevels = ['All levels', 'Advanced', 'Intermediate', 'Beginner'];
-    const languages = [
-        'English',
-        'Frances',
-        'Hindi',
-        'Russian',
-        'Spanish',
-        'Bengali',
-        'Portuguese',
-    ];
+
+    function goToPage(url: string | null) {
+        if (!url) {
+            return;
+        }
+
+        const pageUrl = new URL(url);
+
+        get(pageUrl.pathname + pageUrl.search, {
+            preserveState: true,
+            replace: true,
+            data: data,
+        });
+    }
+
+    useEffect(() => {
+        setradioitems((pre) => [...pre, ...categories]);
+    }, [categories]);
+
+    const page = usePage();
+
+    console.log('page', page);
+
+    function submit() {
+        get('/courses', {
+            preserveState: true,
+            replace: true,
+        });
+    }
 
     return (
         <Listlayout>
@@ -53,61 +111,107 @@ export default function Courses() {
                 {/* filter part */}
                 <div className="space-y-6">
                     {/* category */}
-                    <Categorifilter radioItems={radioItems} />
+
+                    <Categorifilter
+                        radioItems={radioitems}
+                        value={data.category}
+                        fn={setData}
+                    />
                     {/* Course type */}
-                    <Coursestypefilter types={coursestypes} />
-                    <Pricelevel pricelevels={pricelevels} />
-                    <Skilllevels skilllevels={skilllevels} />
-                    <Language languages={languages} />
-                    <Button className="mx-auto w-full! bg-loginbg text-lg font-medium text-text26 transition-colors duration-200 hover:bg-primary">
+                    <Coursestypefilter
+                        types={coursestypes}
+                        value={data.bundle_type}
+                        fn={setData}
+                    />
+                    <Pricelevel
+                        pricelevels={pricelevels}
+                        value={data.price_level}
+                        fn={setData}
+                    />
+                    <Skilllevels
+                        skilllevels={skilllevels}
+                        value={data.skilllevel}
+                        fn={setData}
+                    />
+                    <Language
+                        languages={languages}
+                        value={data.language}
+                        fn={setData}
+                    />
+                    <Button
+                        className="mx-auto w-full! bg-loginbg text-lg font-medium text-text26 transition-colors duration-200 hover:bg-primary"
+                        onClick={submit}
+                    >
                         Filter Results
                     </Button>
                 </div>
                 {/* items part */}
                 <div className="col-span-3 space-y-6">
-                    <Headtitle />
+                    <Headtitle
+                        search={data.search}
+                        sorting={data.sorting}
+                        submit={submit}
+                        fn={setData}
+                        from={courses.from}
+                        to={courses.to}
+                        total={courses.total}
+                    />
                     <div className="grid grid-cols-3 gap-3">
-                        <Onecourseinlist />
-                        <Onecourseinlist />
-                        <Onecourseinlist />
-                        <Onecourseinlist />
-                        <Onecourseinlist />
-                        <Onecourseinlist />
-                        <Onecourseinlist />
-                        <Onecourseinlist />
+                        {courses.data.map((crs) => (
+                            <Onecourseinlist data={crs} key={crs.id} />
+                        ))}
                     </div>
                     {/* pagination */}
                     <div className="flex w-full items-center justify-center">
                         <Pagination>
                             <PaginationContent>
-                                <PaginationItem>
-                                    <PaginationLink href="#" isActive>
-                                        <LucideArrowLeft />
-                                    </PaginationLink>
-                                </PaginationItem>
-                                <PaginationItem className="rounded-lg border-[1px] border-[#E9E9E9]">
-                                    <PaginationLink href="#">1</PaginationLink>
-                                </PaginationItem>
-                                <PaginationItem className="rounded-lg border-[#E9E9E9]">
-                                    <PaginationLink
-                                        href="#"
-                                        isActive
-                                        className="bg-loginbg!"
-                                    >
-                                        2
-                                    </PaginationLink>
-                                </PaginationItem>
-                                <PaginationItem className="rounded-lg border-[1px] border-[#E9E9E9]">
-                                    <PaginationLink href="#">3</PaginationLink>
-                                </PaginationItem>
-                                <PaginationItem className="rounded-lg border-[1px] border-[#E9E9E9]">
-                                    <PaginationEllipsis />
-                                </PaginationItem>
-                                <PaginationItem className="rounded-lg border-[1px] border-[#E9E9E9] bg-loginbg!">
-                                    <PaginationLink href="#" isActive>
-                                        <LucideArrowRight />
-                                    </PaginationLink>
-                                </PaginationItem>
+                                {courses.links.map((i, ind) => {
+                                    if (i.label === '&hellip;') {
+                                        return (
+                                            <PaginationItem
+                                                key={ind}
+                                                className="rounded-lg border-[1px] border-[#E9E9E9]"
+                                            >
+                                                <PaginationEllipsis />
+                                            </PaginationItem>
+                                        );
+                                    }
+
+                                    return (
+                                        <PaginationItem
+                                            key={ind}
+                                            className="rounded-lg border-[1px] border-[#E9E9E9]"
+                                        >
+                                            <PaginationLink
+                                                href={'#'}
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    goToPage(i.url);
+                                                }}
+                                                isActive={i.active}
+                                                className={
+                                                    i.active
+                                                        ? 'bg-loginbg!'
+                                                        : ''
+                                                }
+                                            >
+                                                {i.label ===
+                                                '&laquo; Previous' ? (
+                                                    <LucideArrowLeft />
+                                                ) : i.label ===
+                                                  'Next &raquo;' ? (
+                                                    <LucideArrowRight />
+                                                ) : (
+                                                    <span
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: i.label,
+                                                        }}
+                                                    />
+                                                )}
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                    );
+                                })}
                             </PaginationContent>
                         </Pagination>
                     </div>

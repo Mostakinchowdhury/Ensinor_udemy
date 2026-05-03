@@ -1,8 +1,42 @@
-import React from 'react';
+import { useForm, usePage } from '@inertiajs/react';
+import React, { useEffect } from 'react';
+import { toast } from 'sonner';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 
 export default function Subscribe() {
+    // const hasShown = useRef(false);
+    const { data, setData, post } = useForm({ email: '' });
+
+    const handlepost = () => {
+        post('/subscribe', {
+            onSuccess: () => {
+                setData('email', '');
+            },
+            onError: () => {
+                setData('email', 'error');
+            },
+        });
+    };
+
+    const { flash, props } = usePage();
+
+    console.log('pages info ', usePage());
+
+    useEffect(() => {
+        if (flash?.success) {
+            toast.success('Subscribe succesfully', {
+                description: flash.success as string,
+            });
+        }
+
+        if (props.errors?.email) {
+            toast.error('Subscribe failed', {
+                description: props.errors.email,
+            });
+        }
+    }, [flash, props.errors]);
+
     return (
         <div className="relative mx-auto my-24 box-border flex h-[430px] max-w-6xl items-center overflow-hidden rounded-xl bg-[#FFF5CC] p-6">
             {/* rings */}
@@ -19,8 +53,13 @@ export default function Subscribe() {
                     <Input
                         placeholder="Enter your email"
                         className="footnavbtn placeholder:poppins border-0 text-sm font-normal text-[#707071] shadow-none outline-0 placeholder:text-sm placeholder:font-normal placeholder:text-[#707071] focus-within:ring-0 focus-within:outline-0 focus:ring-0 focus:outline-0 focus-visible:ring-0 focus-visible:outline-0"
+                        value={data.email}
+                        onChange={(e) => setData('email', e.target.value)}
                     />
-                    <Button className="poppins h-full cursor-pointer rounded-none bg-loginbg px-6 py-2 text-sm font-medium text-black hover:bg-loginbg/90 focus:bg-loginbg/90 active:bg-loginbg/90">
+                    <Button
+                        className="poppins h-full cursor-pointer rounded-none bg-loginbg px-6 py-2 text-sm font-medium text-black hover:bg-loginbg/90 focus:bg-loginbg/90 active:bg-loginbg/90"
+                        onClick={handlepost}
+                    >
                         Subscribe
                     </Button>
                 </div>

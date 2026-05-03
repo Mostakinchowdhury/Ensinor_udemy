@@ -1,37 +1,45 @@
 import { Lock, PlayIcon } from 'lucide-react';
 import React from 'react';
+import type { curriculam } from '@/pages/detail/Coursedt';
 import { Button } from '../ui/button';
 
 export default function Singlecritem({
-    h3,
-    p,
-    ispremium,
+    data,
+    fn,
 }: {
-    h3?: string;
-    p?: string;
-    ispremium: boolean;
+    data: curriculam;
+    fn: React.Dispatch<React.SetStateAction<curriculam>>;
 }) {
     return (
         <li className="flex items-center justify-between">
             <div className="flex items-center gap-2">
                 <div
-                    className={`inline-flex size-10 items-center justify-center rounded-full ${ispremium ? 'bg-[#D7D7D7]' : 'bg-loginbg'}`}
+                    className={`inline-flex size-10 items-center justify-center rounded-full ${data.ispremium ? 'bg-[#D7D7D7]' : 'bg-loginbg'}`}
                 >
-                    {!ispremium ? <PlayIcon size={24} /> : <Lock size={24} />}
+                    {!data.ispremium ? (
+                        <PlayIcon size={24} />
+                    ) : (
+                        <Lock size={24} />
+                    )}
                 </div>
                 <div className="space-y-1">
                     {' '}
                     <h3 className="text-xl font-medium text-text50">
-                        {h3 ?? 'Understanding Design Thinking & Process'}
+                        {data.title ??
+                            'Understanding Design Thinking & Process'}
                     </h3>
-                    <p className="text-sm text-text50">{p ?? '1h 35m'}</p>{' '}
+                    <p className="text-sm text-text50">
+                        {data.duration ?? '1h 35m'}
+                    </p>{' '}
                 </div>
             </div>
 
             <Button
-                className={`${ispremium ? 'bg-black text-white' : 'bg-loginbg text-text40'} text-lg font-medium hover:bg-primary`}
+                className={`${data.ispremium ? 'bg-black text-white' : 'bg-loginbg text-text40'} text-lg font-medium hover:bg-primary`}
+                disabled={data.ispremium > 0}
+                onClick={() => fn(data)}
             >
-                {ispremium ? 'Premium' : 'Play'}
+                {data.ispremium ? 'Premium' : 'Play'}
             </Button>
         </li>
     );

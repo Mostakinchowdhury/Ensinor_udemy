@@ -3,9 +3,23 @@ import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Textarea } from '../ui/textarea';
+import { useForm, usePage } from '@inertiajs/react';
 
 export default function Addreviewpop() {
-    const [rating, setrating] = useState(0);
+    const page = usePage();
+
+    const { data, setData, post } = useForm({
+        review_msg: '',
+        rating: 0,
+        course_id: page.url.split('/').pop(),
+    });
+
+    const handleclick = (e: any) => {
+        e.preventDefault();
+        post('/review');
+        setData('rating', 0);
+        setData('review_msg', '');
+    };
 
     return (
         <Popover>
@@ -60,11 +74,11 @@ export default function Addreviewpop() {
                                         key={i}
                                         className="inline-block cursor-pointer"
                                         color={
-                                            i + 1 <= (rating || 0)
+                                            i + 1 <= (data.rating || 0)
                                                 ? 'yellow'
                                                 : 'gray'
                                         }
-                                        onClick={() => setrating(i + 1)}
+                                        onClick={() => setData('rating', i + 1)}
                                     />
                                 ))}
                         </div>
@@ -77,12 +91,25 @@ export default function Addreviewpop() {
                         <Textarea
                             placeholder="Write here....."
                             className="h-40 resize-none border-2 border-[#d7d7d7] bg-[#fbfbfb] text-[16px] text-[#606060] placeholder:text-[16px] placeholder:text-[#606060]"
+                            value={data.review_msg}
+                            onChange={(i) =>
+                                setData('review_msg', i.target.value)
+                            }
                         />
                         <div className="flex items-center gap-3">
-                            <Button className="grow bg-[#FFDE5926] text-lg font-semibold text-loginbg hover:bg-amber-100">
+                            <Button
+                                className="grow bg-[#FFDE5926] text-lg font-semibold text-loginbg hover:bg-amber-100"
+                                onClick={() => {
+                                    setData('rating', 0);
+                                    setData('review_msg', '');
+                                }}
+                            >
                                 Cancel
                             </Button>
-                            <Button className="grow bg-loginbg text-lg font-semibold text-text40">
+                            <Button
+                                className="grow bg-loginbg text-lg font-semibold text-text40"
+                                onClick={handleclick}
+                            >
                                 Submit
                             </Button>
                         </div>

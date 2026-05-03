@@ -31,4 +31,14 @@ class User extends Authenticatable
             'two_factor_confirmed_at' => 'datetime',
         ];
     }
+    public function subscriptions()
+{
+    return $this->hasMany(Subscription::class);
+}
+
+public function activeSubscription()
+{
+    return $this->hasOne(Subscription::class)
+        ->where('valid_till', '>=', now());
+}
 }

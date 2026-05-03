@@ -1,17 +1,34 @@
 import { Send, StarIcon } from 'lucide-react';
 import React from 'react';
+import type { Review } from '@/pages/detail/Coursedt';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
+import { useForm } from '@inertiajs/react';
 
-export default function Onereviewindetail() {
+export default function Onereviewindetail({ data }: { data: Review }) {
     const [onreplay, setonreplay] = React.useState(false);
+
+    const {
+        data: fdt,
+        setData,
+        post,
+    } = useForm({
+        replay_msg: '',
+        review_id: data.id,
+        course_id: data.course_id,
+    });
 
     return (
         <div className="mb-4 space-y-3 border-b-2 border-[#606060] pb-4">
             <h3 className="text-lg font-medium text-text40">
-                By Shahid Hasan{' '}
+                {data.user.name}
                 <span className="ml-1 inline-block text-[16px]">
-                    on 28 sep 2026
+                    on{' '}
+                    {new Date(data.created_at).toLocaleString('en-uk', {
+                        day: '2-digit',
+                        month: 'short',
+                        year: 'numeric',
+                    })}
                 </span>
             </h3>
             {/* star */}
@@ -22,32 +39,39 @@ export default function Onereviewindetail() {
                         <StarIcon
                             key={i}
                             className="inline-block"
-                            color={i + 1 <= 3 ? 'yellow' : 'gray'}
+                            color={i + 1 <= data.rating ? 'yellow' : 'gray'}
                         />
                     ))}
             </div>
             <p className="text-lg text-[#707070]">
-                Explore a diverse selection of courses all in one platform,
+                {data.review_msg ??
+                    `Explore a diverse selection of courses all in one platform,
                 designed to cater to various learning needs and interests,
                 making education more accessible and convenient. Explore a
                 diverse selection of courses all in one platform, designed to
-                cater to various learning needs and interests, making education
+                cater to various learning needs and interests, making education`}
             </p>
 
             {/* replay of review */}
-            {onreplay && (
-                <div className="ml-6 space-y-1">
-                    <h4 className="text-lg font-medium text-[#606060]">
-                        Md Shimul{' '}
-                        <span className="ml-1.5 inline-block text-[16px] text-[#707070] italic">
-                            on 28 sep 2026{' '}
-                        </span>
-                    </h4>
-                    <p className="text-lg text-[#707070]">
-                        Thank You for your Feedback..!!
-                    </p>
-                </div>
-            )}
+            {onreplay &&
+                data.replay_of_reviews.map((i) => (
+                    <div className="ml-6 space-y-1" key={i.id}>
+                        <h4 className="text-lg font-medium text-[#606060]">
+                            {i.user.name}
+                            <span className="ml-1.5 inline-block text-[16px] text-[#707070] italic">
+                                {new Date(i.created_at).toLocaleString(
+                                    'en-uk',
+                                    {
+                                        day: '2-digit',
+                                        month: 'short',
+                                        year: 'numeric',
+                                    },
+                                )}
+                            </span>
+                        </h4>
+                        <p className="text-lg text-[#707070]">{i.replay_msg}</p>
+                    </div>
+                ))}
             {/* replay of review */}
 
             {/* input box */}
@@ -56,10 +80,16 @@ export default function Onereviewindetail() {
                     <Input
                         placeholder="Add a replay,,,"
                         className="border-2 border-text50 py-1.5 text-[16px] text-[#999999] placeholder:text-[#999999]"
+                        value={fdt.replay_msg}
+                        onChange={(e) => setData('replay_msg', e.target.value)}
                     />
                     <Button
                         className="flex items-center justify-center bg-loginbg"
-                        onClick={() => setonreplay(false)}
+                        onClick={() => {
+                            setonreplay(false);
+                            post('/replay_of_review');
+                            setData('replay_msg', '');
+                        }}
                     >
                         <Send />
                     </Button>
