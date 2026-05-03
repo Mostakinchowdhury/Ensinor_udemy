@@ -14,7 +14,7 @@ import Trenbooksover from '@/components/home/trebooks';
 import TrenCoursesover from '@/components/home/Trecoursesover';
 import Treevents from '@/components/home/Treevents';
 
-export default function Welcome() {
+export default function welcome() {
     return (
         <div>
             <Nav />

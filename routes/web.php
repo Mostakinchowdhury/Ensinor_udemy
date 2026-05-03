@@ -12,11 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-
-
-// home page
-
-// Route::inertia('/', 'welcome');
 Route::get('/', function(Request $request){
     $pcourses=Course::query()->with('category')->when($request->category && $request->category != "all",function ($q) {
         $q->whereHas("category",function ($query) {
@@ -33,16 +28,28 @@ Route::get('/', function(Request $request){
 
 });
 
-
-// about page
-
 Route::get('/about', function () {
     return Inertia::render('About');
 })->name('about');
 
+Route::get('/pricing', function () {
+    return Inertia::render('Pricing');
+});
+
+Route::get('/instructor', function () {
+    return Inertia::render('Instructor');
+});
+// Route::get('/instructor/{id}', function ($id) {
+//     return Inertia::render('InstructorDetail', ["id" => $id]);
+// });
+
+// ekhn direct route banano hoise /InstructorDetail. pore id anujayi korte hbe
+Route::get('/instructordetail', function () {
+    return Inertia::render('InstructorDetail');
+});
 
 
-// course resource 
+
 
 Route::resource("courses",CourseController::class);
 
@@ -63,3 +70,4 @@ Route::post("review",[ReviewController::class,"store"]);
 // subscribers
 
 Route::post("subscribe",[SubscriberController::class,"store"]);
+
