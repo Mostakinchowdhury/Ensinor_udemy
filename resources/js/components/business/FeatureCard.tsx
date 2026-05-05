@@ -1,24 +1,25 @@
-import { Car } from "lucide-react";
-import React from "react";
+import React from 'react';
 
-const FeatureCard = () => {
-  return (
-    <div className="w-[370px]  min-h-[235px] flex flex-col justify-center items-center bg-[#F3F6F7] rounded-xl p-5 text-center hover:shadow-md transition">
-      
-      <Car size={50} />
+type FeatureCardProps = {
+    icon: React.ReactNode;
+    title: string;
+    subtitle: string;
+};
 
-      <h1 className="text-[18px] text-[#303030] font-semibold my-2">
-        Invite Only access
-      </h1>
+const FeatureCard = ({ icon, title, subtitle }: FeatureCardProps) => {
+    return (
+        <div className="flex min-h-[235px] w-[370px] flex-col items-center justify-center rounded-xl bg-[#F3F6F7] p-5 text-center transition hover:shadow-md">
+            <div className='p-2 bg-[#FFF5CC]'>
+              {icon}
+            </div>
 
-      <p className="text-sm text-text50">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore
-        suscipit consequuntur aperiam amet, quia nobis saepe ex reprehenderit
-        dolorum provident.
-      </p>
+            <h1 className="my-2 text-[18px] font-semibold text-[#303030]">
+                {title}
+            </h1>
 
-    </div>
-  );
+            <p className="text-sm text-text50">{subtitle}</p>
+        </div>
+    );
 };
 
 export default FeatureCard;

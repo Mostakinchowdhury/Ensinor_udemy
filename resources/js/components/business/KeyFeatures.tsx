@@ -3,7 +3,7 @@ import FeatureContainer from "./FeatureContainer";
 
 const KeyFeatures = () => {
   return (
-    <div className="w-full py-16 flex justify-center text-black px-4">
+    <div className="w-full h-fit py-16 flex justify-center text-black px-4">
       
       <div className="w-full max-w-6xl">
         
@@ -14,13 +14,11 @@ const KeyFeatures = () => {
 
         {/* Subtitle */}
         <p className="text-center text-text50 max-w-2xl mx-auto mt-3 text-sm md:text-base">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum,
-          fugit quaerat molestiae ad repellat minima!
+          Everything you need to train your team and engage your customers effectively
         </p>
 
         {/* Cards */}
-        <FeatureContainer />
-
+            <FeatureContainer />
       </div>
     </div>
   );
