@@ -1,4 +1,5 @@
 import BusinessHero from '@/components/business/BusinessHero'
+import ForBusiness from '@/components/business/ForBusiness'
 import KeyFeatures from '@/components/business/KeyFeatures'
 import Nav from '@/components/global/nav'
 
@@ -8,6 +9,7 @@ const Business = () => {
         <Nav/>
         <BusinessHero/>
         <KeyFeatures/>
+        <ForBusiness/>
     </div>
   )
 }
