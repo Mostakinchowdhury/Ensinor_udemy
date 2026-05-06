@@ -15,12 +15,7 @@ import Thinkingcom from '@/components/home/Thinkingcom';
 import Trenbooksover from '@/components/home/trebooks';
 import TrenCoursesover from '@/components/home/Trecoursesover';
 import Treevents from '@/components/home/Treevents';
-export type PageProps = {
-    flash?: {
-        success?: string;
-        error?: string;
-    };
-};
+
 export default function Welcome() {
     const { flash } = usePage().props as any;
     useEffect(() => {
