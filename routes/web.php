@@ -69,8 +69,12 @@ Route::get('/pricing', function () {
     return Inertia::render('Pricing');
 });
 
-Route::get('/instructor', function () {
-    return Inertia::render('Instructor');
+Route::get('/business', function () {
+    return Inertia::render('Business');
+});
+
+Route::get('/instructors', function () {
+    return Inertia::render('Instructors');
 });
 // Route::get('/instructor/{id}', function ($id) {
 //     return Inertia::render('InstructorDetail', ["id" => $id]);

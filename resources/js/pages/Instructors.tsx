@@ -4,7 +4,7 @@ import Nav from '@/components/global/nav'
 import EveryInstructorDataContainer from '@/components/Instructor/EveryInstructorDataContainer'
 
 
-const Instructor = () => {
+const Instructors = () => {
   return (
     <div>
         <Nav/>
@@ -15,4 +15,4 @@ const Instructor = () => {
   )
 }
 
-export default Instructor
+export default Instructors
