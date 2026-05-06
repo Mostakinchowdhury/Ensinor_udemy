@@ -1,16 +1,41 @@
-import { Link } from '@inertiajs/react';
+import { Link, router, usePage } from '@inertiajs/react';
 import { ShoppingBasket } from 'lucide-react';
 import React from 'react';
 import { Button } from '../ui/button';
 
+export type User = {
+    id: number;
+    name: string;
+    email: string;
+    email_verified_at: string | null;
+    otp: string | null;
+    otp_expires_at: string | null;
+    role: 'User' | 'Instructor' | 'Admin';
+    two_factor_confirmed_at: string | null;
+    created_at: string;
+    updated_at: string;
+};
+
 export default function Nav() {
+    const page = usePage<{ auth: { user: User | null } }>();
+
+    const u = page.props.auth.user;
+
+    const handleloginorout = () => {
+        if (u) {
+            router.post('/logout');
+        } else {
+            router.get('/login');
+        }
+    };
+
     return (
         <header className="w-full bg-navbg p-4">
             {' '}
             {/* হেডার ফুল উইডথ থাকবে */}
             <nav className="container mx-auto flex max-w-6xl items-center justify-between">
                 {/* Logo */}
-                <div>
+                <div className="cursor-pointer" onClick={() => router.get('/')}>
                     <h2 className="rounded-lg bg-loginbg p-2 text-4xl font-semibold">
                         Ensinor
                     </h2>
@@ -61,8 +86,12 @@ export default function Nav() {
                 </ul>
 
                 {/* Login Button */}
-                <Button className="navbtn relative bg-loginbg text-black">
-                    Login{' '}
+
+                <Button
+                    className="navbtn relative bg-loginbg text-black"
+                    onClick={handleloginorout}
+                >
+                    {u ? 'Logout' : 'Login'}
                     <span className="absolute top-0 -left-14 h-full w-0.5 bg-white"></span>
                 </Button>
             </nav>
