@@ -31,3 +31,24 @@ Route::post("subscribe",[SubscriberController::class,"store"]);
 // courses list page
 
 Route::get("/courses",[CourseController::class,"index"])->name("courses.index");
+
+
+Route::get('/pricing', function () {
+    return Inertia::render('Pricing');
+});
+
+Route::get('/business', function () {
+    return Inertia::render('Business');
+});
+
+Route::get('/instructors', function () {
+    return Inertia::render('Instructors');
+});
+// Route::get('/instructor/{id}', function ($id) {
+//     return Inertia::render('InstructorDetail', ["id" => $id]);
+// });
+
+// ekhn direct route banano hoise /InstructorDetail. pore id anujayi korte hbe
+Route::get('/instructordetail', function () {
+    return Inertia::render('InstructorDetail');
+});
