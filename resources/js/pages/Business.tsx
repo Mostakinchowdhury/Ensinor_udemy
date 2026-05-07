@@ -2,6 +2,7 @@ import BusinessHero from '@/components/business/BusinessHero'
 import ForBusiness from '@/components/business/ForBusiness'
 import HowItWorks from '@/components/business/HowItWorks'
 import KeyFeatures from '@/components/business/KeyFeatures'
+import SubscriptionPlans from '@/components/business/SubscriptionPlans'
 import Nav from '@/components/global/nav'
 
 const Business = () => {
@@ -12,6 +13,7 @@ const Business = () => {
         <KeyFeatures/>
         <ForBusiness/>
         <HowItWorks/>
+        <SubscriptionPlans/>
     </div>
   )
 }
