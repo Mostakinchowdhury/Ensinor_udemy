@@ -20,7 +20,7 @@ export default function Partners() {
                     your own pace.
                 </p>
                 {/* logos */}
-                <div className="mt-12 flex items-center justify-between gap-6">
+                <div className="mt-12 flex text-black items-center justify-between gap-6">
                     <Microscope size={54} />
                     <TypeOutlineIcon size={54} />
                     <AlignEndVertical size={54} />
