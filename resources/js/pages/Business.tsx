@@ -1,4 +1,5 @@
 import BusinessHero from '@/components/business/BusinessHero'
+import ClientReview from '@/components/business/ClientReview'
 import ForBusiness from '@/components/business/ForBusiness'
 import FormContainer from '@/components/business/FormContainer'
 import HowItWorks from '@/components/business/HowItWorks'
@@ -18,6 +19,7 @@ const Business = () => {
         <SubscriptionPlans/>
         <Partners/>
         <FormContainer/>
+        <ClientReview/>
     </div>
   )
 }
