@@ -48,7 +48,7 @@ const FormFill = () => {
             >
                 {/* Full Name */}
                 <div>
-                    <label className="block mb-2 font-medium">
+                    <label className="block mb-2 text-[18px]">
                         Full Name <span className="text-red-500">*</span>
                     </label>
 
@@ -58,7 +58,7 @@ const FormFill = () => {
                         value={formData.fullName}
                         onChange={handleChange}
                         placeholder="Enter your full name"
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:border-black"
+                        className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white outline-none focus:border-gray-400"
                         required
                     />
                 </div>
@@ -66,8 +66,8 @@ const FormFill = () => {
                 {/* Email & Company Type */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label className="block mb-2 font-medium">
-                            Email <span className="text-red-500">*</span>
+                        <label className="block mb-2 text-[18px]">
+                           Organization Email <span className="text-red-500">*</span>
                         </label>
 
                         <input
@@ -76,13 +76,13 @@ const FormFill = () => {
                             value={formData.email}
                             onChange={handleChange}
                             placeholder="Enter your email"
-                            className="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:border-black"
+                            className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white outline-none focus:border-gray-400"
                             required
                         />
                     </div>
 
                     <div>
-                        <label className="block mb-2 font-medium">
+                        <label className="block mb-2 text-[18px]">
                             Company Type <span className="text-red-500">*</span>
                         </label>
 
@@ -92,7 +92,7 @@ const FormFill = () => {
                             value={formData.companyType}
                             onChange={handleChange}
                             placeholder="Enter your company type"
-                            className="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:border-black"
+                            className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white outline-none focus:border-gray-400"
                             required
                         />
                     </div>
@@ -101,7 +101,7 @@ const FormFill = () => {
                 {/* Phone & Role */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label className="block mb-2 font-medium">
+                        <label className="block mb-2 text-[18px]">
                             Phone Number <span className="text-red-500">*</span>
                         </label>
 
@@ -111,13 +111,13 @@ const FormFill = () => {
                             value={formData.phone}
                             onChange={handleChange}
                             placeholder="Enter your phone number"
-                            className="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:border-black"
+                            className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white outline-none focus:border-gray-400"
                             required
                         />
                     </div>
 
                     <div>
-                        <label className="block mb-2 font-medium">
+                        <label className="block mb-2 text-[18px]">
                             Your Role <span className="text-red-500">*</span>
                         </label>
 
@@ -127,7 +127,7 @@ const FormFill = () => {
                             value={formData.role}
                             onChange={handleChange}
                             placeholder="Enter your role"
-                            className="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:border-black"
+                            className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white outline-none focus:border-gray-400"
                             required
                         />
                     </div>
@@ -136,7 +136,7 @@ const FormFill = () => {
                 {/* Company Size & Trainees */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label className="block mb-2 font-medium">
+                        <label className="block mb-2 text-[18px]">
                             Company Size <span className="text-red-500">*</span>
                         </label>
 
@@ -146,13 +146,13 @@ const FormFill = () => {
                             value={formData.companySize}
                             onChange={handleChange}
                             placeholder="Enter company size"
-                            className="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:border-black"
+                            className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white outline-none focus:border-gray-400"
                             required
                         />
                     </div>
 
                     <div>
-                        <label className="block mb-2 font-medium">
+                        <label className="block mb-2 text-[18px]">
                             Number of People to Train{' '}
                             <span className="text-red-500">*</span>
                         </label>
@@ -163,7 +163,7 @@ const FormFill = () => {
                             value={formData.trainees}
                             onChange={handleChange}
                             placeholder="Enter number of trainees"
-                            className="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:border-black"
+                            className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white outline-none focus:border-gray-400"
                             required
                         />
                     </div>
@@ -171,18 +171,17 @@ const FormFill = () => {
 
                 {/* Training Needs */}
                 <div>
-                    <label className="block mb-2 font-medium">
+                    <label className="block mb-2 text-[18px]">
                         What are your organization's training needs?{' '}
                         <span className="text-red-500">*</span>
                     </label>
 
-                    <textarea
+                    <input
                         name="trainingNeeds"
                         value={formData.trainingNeeds}
                         onChange={handleChange}
-                        placeholder="e.g. Customer service training, compliance training, leadership development"
-                        rows={5}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 outline-none focus:border-black resize-none"
+                        placeholder="e.g. Customer service training, compliance training etc."
+                        className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white outline-none focus:border-gray-400"
                         required
                     />
                 </div>
