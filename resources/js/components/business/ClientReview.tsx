@@ -1,16 +1,11 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from '../ui/avatar';
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from '../ui/carousel';
+import TestimonialCarousel from './TestimonialCarousel';
+
 
 const ClientReview = () => {
     return (
-        <div className="flex items-center justify-center py-10">
+        <div className="flex items-center justify-center my-16 py-10">
             <div className="w-6xl flex flex-col items-center justify-center">
                 <h1 className="text-center text-[48px] font-semibold text-text40">
                     What our clients say
@@ -58,92 +53,8 @@ const ClientReview = () => {
                         </span>
                     </div>
                 </div>
-                <div className="my-10 flex min-h-[300px] w-full max-w-[400px] rounded-xl items-center justify-center bg-[#F9F9F9] text-black px-4 py-6">
-                    <Carousel>
-                        <CarouselContent>
-                            <CarouselItem>
-                                <div className='px-4'>
-                                    <div className="flex gap-2 my-5 justify-center items-center">
-                                    <img
-                                        src="./contributer.png"
-                                        alt=""
-                                        className="h-20 w-20 rounded-full object-cover"
-                                    />
-                                    <div>
-                                        <h1 className='text-[18px] text-text40 '>Hafziur Rahman</h1>
-                                        <h3 className='mb-2 text-[14px] text-text40'>Full stack web developer</h3>
-                                        <span>⭐⭐⭐⭐⭐</span>
-                                    </div>
-                                </div>
-                                <p className='text-center break-words leading-7 text-sm md:text-base'>
-                                    Explore a diverse selection of courses all
-                                    in one platform, designed to cater to
-                                    various learning needs and interests, making
-                                    education more accessible and convenient.
-                                    Explore a diverse selection of courses all
-                                    in one platform, designed to cater to
-                                    various learning needs and interests, making
-                                    education
-                                </p>
-                                </div>
-                            </CarouselItem>
-                            <CarouselItem>
-                                <div className='px-4'>
-                                    <div className="flex gap-2 my-5 justify-center items-center">
-                                    <img
-                                        src="./contributer.png"
-                                        alt=""
-                                        className="h-20 w-20 rounded-full object-cover"
-                                    />
-                                    <div>
-                                        <h1 className='text-[18px] text-text40 '>Hafziur Rahman</h1>
-                                        <h3 className='mb-2 text-[14px] text-text40'>Full stack web developer</h3>
-                                        <span>⭐⭐⭐⭐⭐</span>
-                                    </div>
-                                </div>
-                                <p className='text-center break-words leading-7 text-sm md:text-base'>
-                                    Explore a diverse selection of courses all
-                                    in one platform, designed to cater to
-                                    various learning needs and interests, making
-                                    education more accessible and convenient.
-                                    Explore a diverse selection of courses all
-                                    in one platform, designed to cater to
-                                    various learning needs and interests, making
-                                    education
-                                </p>
-                                </div>
-                            </CarouselItem>
-                            <CarouselItem>
-                                <div className='px-4'>
-                                    <div className="flex gap-2 my-5 justify-center items-center">
-                                    <img
-                                        src="./contributer.png"
-                                        alt=""
-                                        className="h-20 w-20 rounded-full object-cover"
-                                    />
-                                    <div>
-                                        <h1 className='text-[18px] text-text40 '>Hafziur Rahman</h1>
-                                        <h3 className='mb-2 text-[14px] text-text40'>Full stack web developer</h3>
-                                        <span>⭐⭐⭐⭐⭐</span>
-                                    </div>
-                                </div>
-                               <p className='text-center break-words leading-7 text-sm md:text-base'>
-                                    Explore a diverse selection of courses all
-                                    in one platform, designed to cater to
-                                    various learning needs and interests, making
-                                    education more accessible and convenient.
-                                    Explore a diverse selection of courses all
-                                    in one platform, designed to cater to
-                                    various learning needs and interests, making
-                                    education
-                                </p>
-                                </div>
-                            </CarouselItem>
-                            
-                        </CarouselContent>
-                        <CarouselPrevious />
-                        <CarouselNext />
-                    </Carousel>
+                <div className="">
+                    <TestimonialCarousel />
                 </div>
             </div>
         </div>
